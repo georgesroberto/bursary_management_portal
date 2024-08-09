@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<section
+  class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center mt-5 py-4"
+>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div
+        class="col-lg-8 d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="d-flex justify-content-center py-4">
+          <a
+            href="{% url 'index' %}"
+            class="logo d-flex align-items-center w-auto"
+          >
+            <img src="{% static 'img/t254.png' %}" alt="logo" />
+            <span class="d-none d-lg-block">Tender254</span>
+          </a>
+        </div>
+        <!-- End Logo -->
+
+        <div class="card mb-3">
+          <div class="card-body">
+            {% if messages %}{% for m in messages %}
+            <div class="card">
+              <span class="p-4 text-center" style="color: red" ;>{{ m }}</span>
+            </div>
+            {% endfor %}{% endif %}
+            <div class="p-4">
+              <h5 class="card-title text-center pb-0 fs-4">
+                Login to Your Account
+              </h5>
+              <p class="text-center small">
+                Enter your username & password to login
+              </p>
+            </div>
+            <form method="POST" class="row g-3 needs-validation">
+              {% csrf_token %} {% for field in form %}
+              <div class="col-12">{% bootstrap_field field %}</div>
+              {% endfor %}
+              <div class="col-12 p-3">
+                <button class="btn btn-primary w-100" type="submit">
+                  Login
+                </button>
+              </div>
+            </form>
+
+            <div class="col-12">
+              <p class="small mb-0">
+                Need An Account?
+                <a href="{% url 'users:register' %}">Sign Up Now</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

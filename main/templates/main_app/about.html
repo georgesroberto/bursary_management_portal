@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>About Bursary Management System</h2>
+      <p class="lead">Your Partner in Educational Funding</p>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      {% load static %}
+      <img
+        src="{% static 'img/study.jpg' %}"
+        alt="About Us"
+        class="img-fluid rounded"
+      />
+    </div>
+    <div class="col-md-6">
+      <h3>Our Mission</h3>
+      <p>
+        At BursaryMS, our mission is to bridge the gap between students and
+        their educational aspirations. We believe every student deserves the
+        chance to pursue higher education without the burden of financial
+        constraints.
+      </p>
+      <h3>Our Vision</h3>
+      <p>
+        We envision a world where financial limitations never hinder educational
+        opportunities. Our platform connects students with a vast array of
+        bursary options, ensuring that every learner finds the right fit for
+        their needs.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

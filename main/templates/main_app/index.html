@@ -1,0 +1,105 @@
+{% extends "base_generic.html" %} {% block content %}
+
+<header class="jumbotron text-center bg-primary text-white">
+  <h1>Welcome to Bursary Management System</h1>
+  <p>Empowering students, enabling success!</p>
+  <a href="" class="btn btn-light btn-lg">Learn More</a>
+</header>
+
+<div class="container mt-5">
+  {% load static %}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <img
+          src="{% static 'img/apply.jpg' %}"
+          class="card-img-top"
+          alt="Bursary Application"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Apply for Bursaries</h5>
+          <p class="card-text">
+            Find bursaries that fit your needs and apply with ease.
+          </p>
+          <a href="" class="btn btn-primary">Start Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <img
+          src="{% static 'img/applied.jpg' %}"
+          class="card-img-top"
+          alt="Bursary Management"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Manage Your Applications</h5>
+          <p class="card-text">
+            Keep track of your applications and stay updated.
+          </p>
+          <a href="" class="btn btn-primary">Manage</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron text-center bg-primary text-white my-3">
+  <div class="card-header">
+    <h3>Apply For Bursaries</h3>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mt-5">
+    {% for bursary in bursaries %}
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <img
+          src="{% static 'img/bus.jpeg' %}"
+          class="card-img-top"
+          alt="Bursary Image"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ bursary.title }}</h5>
+          <p class="card-text">{{ bursary.description }}</p>
+          <a {% comment %} href="" {% endcomment %} class="btn btn-primary"
+            >Apply</a
+          >
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-md-12">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body bg-dark p-3 text-center text-light">
+          <span class="p-3">No bursaries at the moment check back later</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="mt-5">
+    <h3>Education Institutions</h3>
+    <p>
+      Education institutions can log into the system or register. After logging
+      in, they can apply for bursaries on behalf of students or check the status
+      of previous applications, including how many students have applied for
+      bursaries so far. Institutions can also log out to exit the system.
+    </p>
+  </div>
+
+  <div class="mt-3">
+    <h3>Admin / CDF Office</h3>
+    <p>
+      The admin or CDF office can log in to upload application details and
+      update applicants. The office can also update content used in the
+      application process.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

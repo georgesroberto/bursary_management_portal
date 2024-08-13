@@ -32,7 +32,6 @@ def profile(request):
         form = UserProfileForm(instance=request.user)
     return render(request, 'users/profile.html', {'form': form})
 
-# You can use Django's built-in views for login, logout, password change, etc.
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'
 

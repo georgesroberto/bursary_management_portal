@@ -1,0 +1,21 @@
+{% extends 'admin_generic.html' %} {% block content %} {% include 'nav.html' %}
+
+<section class="section">
+  <div class="container">
+    <div class="card p-2">
+      <div class="card-header">
+        <h2>Are you sure you want to delete this bursary?</h2>
+        <p>Title: {{ bursary.title }}</p>
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Yes, delete</button>
+          <a href="{% url 'bus:bursary_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

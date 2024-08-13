@@ -6,6 +6,11 @@ class BursaryForm(forms.ModelForm):
         model = Bursary
         fields = ['title', 'description', 'amount']
 
+    def __init__(self, *args, **kwargs):
+        super(BursaryForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
+
 class QuestionnaireForm(forms.ModelForm):
     class Meta:
         model = Questionnaire

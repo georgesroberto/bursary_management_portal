@@ -21,3 +21,7 @@ class ApplicationAdmin(admin.ModelAdmin):
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('application', 'file')
     search_fields = ('application__student__first_name', 'application__student__last_name', 'application__bursary__title')
+
+
+admin.site.site_header = 'Bursary Management System'
+admin.site.site_title = 'Bursary Management System'

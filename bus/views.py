@@ -11,9 +11,9 @@ from .forms import BursaryForm, QuestionnaireForm, ApplicationForm
 
 
 # Create your views here.
-@check_group_permission(['Checklist', 'Administrator'])
-def index(request):
-    return HttpResponse('Home')
+# @check_group_permission(['Checklist', 'Administrator'])
+# def index(request):
+#     return HttpResponse('Home')
 
 # Bursary Views
 
@@ -35,10 +35,37 @@ def create_bursary(request):
             bursary.posted_by = request.user
             bursary.save()
             messages.success(request, 'Bursary created successfully.')
-            return redirect('bursary_list')
+            return redirect('bus:list_bursaries')
     else:
         form = BursaryForm()
-    return render(request, 'bursary/create_bursary.html', {'form': form})
+    return render(request, 'bursary/create_bursary.html', {'form': form, 'title':'Add '})
+
+
+@login_required
+def update_bursary(request, bursary_id):
+    bursary = get_object_or_404(Bursary, pk=bursary_id)
+    
+    if request.method == 'POST':
+        form = BursaryForm(request.POST, instance=bursary)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Bursary updated successfully.')
+            return redirect('bus:list_bursaries')
+    else:
+        form = BursaryForm(instance=bursary)
+    
+    return render(request, 'bursary/create_bursary.html', {'form': form, 'title':'Update '})
+
+
+@login_required
+def delete_bursary(request, bursary_id):
+    bursary = get_object_or_404(Bursary, pk=bursary_id)
+    
+    if request.method == 'POST':
+        bursary.delete()
+        messages.success(request, 'Bursary deleted successfully.')
+        return redirect('bus:list_bursaries')   
+    return render(request, 'bursary/confirm_delete_bursary.html', {'bursary': bursary})
 
 
 @login_required
@@ -49,8 +76,8 @@ def issue_bursary(request, application_id):
         doc = Document.objects.create(application=application)
         # Generate PDF or other document here
         messages.success(request, 'Bursary issued and document generated.')
-        return redirect('application_status', application_id=application.id)
-    return redirect('bursary_list')
+        return redirect('bus:application_status', application_id=application.id)
+    return redirect('bus:list_bursaries')
 
 
 # Questionnaire Views

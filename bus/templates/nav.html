@@ -1,0 +1,74 @@
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'bus:index' %}">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#bursary-nav"
+        data-bs-toggle="collapse"
+        href="{% url 'bus:index' %}"
+      >
+        <i class="bi bi-menu-down"></i><span>Bursaries</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="bursary-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a href="{% url 'bus:list_bursaries' %}">
+            <i class="bi bi- bi-2xlg"></i>
+            <span>All Bursaries</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bus:create_bursary' %}">
+            <i class="bi bi-plus=circle bi-2xlg"></i>
+            <span>New Bursary</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#applications-nav"
+        data-bs-toggle="collapse"
+        href="{% url 'bus:index' %}"
+      >
+        <i class="bi bi-clipboard2-data"></i><span>Applications</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="applications-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a href="{% url 'bus:list_bursaries' %}">
+            <i class="bi bi-pencil text-primary bi-2xlg"></i>
+            <span>All Bursaries</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bus:create_bursary' %}">
+            <i class="bi bi-plus text-primary bi-2xlg"></i>
+            <span>New Bursary</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- End Profile Page Nav -->
+  </ul>
+</aside>
+<!-- End Sidebar-->

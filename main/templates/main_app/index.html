@@ -63,9 +63,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ bursary.title }}</h5>
           <p class="card-text">{{ bursary.description }}</p>
-          <a {% comment %} href="" {% endcomment %} class="btn btn-primary"
-            >Apply</a
-          >
+          <a href="{% url 'std:index' %}" class="btn btn-primary">Apply</a>
         </div>
       </div>
     </div>

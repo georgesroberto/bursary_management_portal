@@ -8,5 +8,4 @@ class InstitutionAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ( 'first_name', 'last_name', 'email')
-    search_fields = ('registration_number', 'first_name', 'last_name', 'institution__name')
+    list_display = ('student_id', 'program')

@@ -2,9 +2,9 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
     <li class="nav-item active">
-      <a class="nav-link" href="{% url 'bus:index' %}">
+      <a class="nav-link" href="{% url 'std:index' %}">
         <i class="bi bi-grid"></i>
-        <span>CDF Dashboard</span>
+        <span>TUM Dashboard</span>
       </a>
     </li>
 
@@ -13,9 +13,9 @@
         class="nav-link collapsed"
         data-bs-target="#components-nav"
         data-bs-toggle="collapse"
-        href="{% url 'bus:index' %}"
+        href="{% url 'std:index' %}"
       >
-        <i class="bi bi-menu-down"></i><span>Bursaries</span
+        <i class="bi bi-person-lines-fill"></i><span>Students</span
         ><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul
@@ -24,15 +24,9 @@
         data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="{% url 'bus:list_bursaries' %}">
+          <a href="{% url 'std:student_list' %}">
             <i class="bi bi-menu-button-wide"></i>
-            <span>All Bursaries</span>
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'bus:create_bursary' %}">
-            <i class="bi bi-plus-circle bi-2xlg"></i>
-            <span>New Bursary</span>
+            <span>All Students</span>
           </a>
         </li>
       </ul>
@@ -54,15 +48,9 @@
         data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="{% url 'bus:list_bursaries' %}">
+          <a href="{% url 'std:view_bursaries' %}">
             <i class="bi bi-pencil text-primary bi-2xlg"></i>
-            <span>All Applications</span>
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'bus:create_bursary' %}">
-            <i class="bi bi-plus text-primary bi-2xlg"></i>
-            <span>New Bursary</span>
+            <span>Apply</span>
           </a>
         </li>
       </ul>

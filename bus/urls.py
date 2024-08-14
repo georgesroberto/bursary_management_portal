@@ -5,7 +5,7 @@ app_name = 'bus'
 
 urlpatterns = [
     # Dashboard
-    path('', views.bursary_list, name='index'),
+    path('', views.bursary_index, name='index'),
 
     # Bursary
     path('list/', views.bursary_list, name='list_bursaries'),

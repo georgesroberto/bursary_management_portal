@@ -1,10 +1,10 @@
 from django.shortcuts import render
-# from bursaries.models import Bursary
+from bus.models import Bursary
 
 def index(request):
-    # bursaries = Bursary.objects.all()
-    # context = ''
-    return render(request, 'main_app/index.html')
+    bursaries = Bursary.objects.all()
+    context = {'bursaries':bursaries}
+    return render(request, 'main_app/index.html', context)
 
 def about(request):
     return render(request, 'main_app/about.html')

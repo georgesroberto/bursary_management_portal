@@ -12,8 +12,9 @@ from .forms import BursaryForm, QuestionnaireForm, ApplicationForm
 
 # Create your views here.
 # @check_group_permission(['Checklist', 'Administrator'])
-# def index(request):
-#     return HttpResponse('Home')
+def bursary_index(request):
+    bursaries = Bursary.objects.all()
+    return render(request, 'bursary/index.html', {'bursaries':bursaries})
 
 # Bursary Views
 
@@ -98,7 +99,7 @@ def create_questionnaire(request, bursary_id):
     return render(request, 'bursary/create_questionnaire.html', {'form': form, 'bursary': bursary})
 
 
-#  Application views
+#  Application view
 
 @login_required
 def submit_application(request, bursary_id):

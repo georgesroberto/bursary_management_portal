@@ -1,0 +1,28 @@
+<!-- student/apply_for_bursary.html -->
+
+{% extends 'base.html' %} {% block content %}
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              Apply for the Python Developer Fund Bursary
+            </h3>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %} {{ form.as_p }}
+              <button type="submit" class="btn btn-primary">
+                Submit Application
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

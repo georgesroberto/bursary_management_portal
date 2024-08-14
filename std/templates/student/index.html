@@ -1,4 +1,4 @@
-{% extends 'admin_generic.html' %} {% block content %} {% include 'nav.html' %}
+{% extends 'admin_generic.html' %} {% block content %} {% include 'std_nav.html'%}
 
 <section class="section dashboard">
   <div class="row">
@@ -6,16 +6,16 @@
     <div class="col-lg-12">
       <div class="row">
         <!-- Applications Card -->
-        <div class="col-xxl-6 col-md-6">
+        <div class="col-xxl-4 col-md-4">
           <div class="card info-card sales-card">
             <div class="card-body">
               <h5 class="card-title">Metrics</h5>
 
               <div class="d-flex align-items-center">
                 <div class="ps-3">
-                  <h6>Bursaries</h6>
+                  <h6>Students</h6>
                   <span class="text-success small pt-1 fw-bold"
-                    >{{ bursaries.count|default:"0" }}</span
+                    >{{ students.count|default:"0" }}</span
                   >
                   <span class="text-muted small pt-2 ps-1">posted</span>
                 </div>
@@ -26,7 +26,25 @@
         <!-- End Applications Card -->
 
         <!-- Applications Card -->
-        <div class="col-xxl-6 col-md-6">
+        <div class="col-xxl-4 col-md-4">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Metrics</h5>
+
+              <div class="d-flex align-items-center">
+                <div class="ps-3">
+                  <h6>Applications</h6>
+                  <span class="text-success small pt-1 fw-bold">12</span>
+                  <span class="text-muted small pt-2 ps-1">applicants</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Applications Card -->
+
+        <!-- Applications Card -->
+        <div class="col-xxl-4 col-md-4">
           <div class="card info-card sales-card">
             <div class="card-body">
               <h5 class="card-title">Metrics</h5>

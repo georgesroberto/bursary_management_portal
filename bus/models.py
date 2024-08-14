@@ -9,16 +9,28 @@ class Bursary(models.Model):
     posted_by = models.ForeignKey(Person, on_delete=models.CASCADE, limit_choices_to={'status': 'cdf'})
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.title}"
+
 class Questionnaire(models.Model):
     bursary = models.ForeignKey(Bursary, on_delete=models.CASCADE)
     question_text = models.TextField()
 
+    def __str__(self):
+        return f"{self.bursary}"
+    
 class Application(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     bursary = models.ForeignKey(Bursary, on_delete=models.CASCADE)
     answers = models.JSONField()
     status = models.CharField(max_length=20, choices=[('Submitted', 'Submitted'), ('Approved', 'Approved'), ('Rejected', 'Rejected')])
 
+    def __str__(self):
+        return f"{self.status}"
+
 class Document(models.Model):
     application = models.OneToOneField(Application, on_delete=models.CASCADE)
     file = models.FileField(upload_to='documents/')
+
+    def __str__(self):
+        return f"{self.application} - {self.file}"

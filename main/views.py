@@ -13,4 +13,4 @@ def contact(request):
     return render(request, 'main_app/contact.html')
 
 def permission_denied_view(request):
-    return render(request, 'frontend/403.html', status=403)
+    return render(request, 'main_app/403.html', status=403)

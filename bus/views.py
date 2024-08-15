@@ -19,14 +19,14 @@ from .models import Application, Document, Bursary
 from .forms import BursaryForm
 
 # Create your views here.
-# @check_group_permission(['Checklist', 'Administrator'])
+@login_required
 def bursary_index(request):
     bursaries = Bursary.objects.all()
     applications = Application.objects.all()
     return render(request, 'bursary/index.html', {'bursaries':bursaries,'applications':applications})
 
 # Bursary Views
-
+@login_required
 def bursary_list(request):
     query = request.GET.get('q')
     if query:
@@ -35,7 +35,7 @@ def bursary_list(request):
         bursaries = Bursary.objects.all()
     return render(request, 'bursary/bursary_list.html', {'bursaries': bursaries})
 
-
+@check_group_permission(['Admin', 'CDF'])
 @login_required
 def create_bursary(request):
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def create_bursary(request):
         form = BursaryForm()
     return render(request, 'bursary/create_bursary.html', {'form': form, 'title':'Add '})
 
-
+@check_group_permission(['Admin', 'CDF'])
 @login_required
 def update_bursary(request, bursary_id):
     bursary = get_object_or_404(Bursary, pk=bursary_id)
@@ -67,6 +67,7 @@ def update_bursary(request, bursary_id):
     return render(request, 'bursary/create_bursary.html', {'form': form, 'title':'Update '})
 
 
+@check_group_permission(['Admin', 'CDF'])
 @login_required
 def delete_bursary(request, bursary_id):
     bursary = get_object_or_404(Bursary, pk=bursary_id)
@@ -78,11 +79,7 @@ def delete_bursary(request, bursary_id):
     return render(request, 'bursary/confirm_delete_bursary.html', {'bursary': bursary})
 
 
-@login_required
-def issue_bursary(request, application_id):
-    application = get_object_or_404(Application, id=application_id)
-
-
+@check_group_permission(['Admin', 'CDF'])
 @login_required
 def issue_bursary(request, application_id):
     application = get_object_or_404(Application, id=application_id)
@@ -106,7 +103,6 @@ def issue_bursary(request, application_id):
 
         # Content paragraphs
         content = [
-            Paragraph(f"{application.bursary.posted_by},", styles["Justified"]),
             Paragraph(f"{application.bursary.posted_by.username},", styles["Justified"]),
             Paragraph(f"{application.bursary.posted_by.status} Office,<br/>Address", styles["Justified"]),
             Spacer(1, 12),  
@@ -131,10 +127,10 @@ def issue_bursary(request, application_id):
             ),
             Spacer(1, 12),
             Paragraph("Regards,", styles["Justified"]),
-            Paragraph(f"{application.bursary.posted_by.username},<br/>CDF Officer", styles["Justified"]),
+            Paragraph(f"{application.bursary.posted_by.username} Officer", styles["Justified"]),
             Spacer(1, 24),
             Paragraph(
-                "<b>BursaryMS</b><br/><a href='http://yourwebsite.com'>Visit our website</a>",
+                "<b>BursaryMS</b>",
                 styles["CenteredBold"]
             )
         ]
@@ -155,12 +151,13 @@ def issue_bursary(request, application_id):
         application.save()
 
         messages.success(request, 'Bursary approved and document generated.')
-        return redirect('bus:application_completed', application_id=application.id)
+        return redirect('bus:application_completed')
     
     messages.error(request, 'Bursary cannot be issued. Invalid application status.')
     return redirect('bus:application_pending')
 
 
+@check_group_permission(['Admin', 'CDF'])
 @login_required
 def reject_bursary(request, application_id):
     application = get_object_or_404(Application, id=application_id)
@@ -177,10 +174,12 @@ def reject_bursary(request, application_id):
 
 
 #  Application view
+@login_required
 def application_list(request):
     applications = Application.objects.all()
     return render(request, 'bursary/application_list.html', {'applications':applications})
 
+@login_required
 def application_pending(request):
     applications = Application.objects.all().filter(status='Submitted')
     return render(request, 'bursary/application_pending.html', {'applications':applications})

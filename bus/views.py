@@ -81,24 +81,6 @@ def issue_bursary(request, application_id):
 
 
 #  Application view
-
-@login_required
-def submit_application(request, bursary_id):
-    bursary = get_object_or_404(Bursary, id=bursary_id)
-    if request.method == 'POST':
-        form = ApplicationForm(request.POST)
-        if form.is_valid():
-            application = form.save(commit=False)
-            application.student = request.user.student
-            application.bursary = bursary
-            application.save()
-            messages.success(request, 'Application submitted successfully.')
-            return redirect('application_status', application_id=application.id)
-    else:
-        form = ApplicationForm()
-    return render(request, 'bursary/submit_application.html', {'form': form, 'bursary': bursary})
-
-
 @login_required
 def application_detail(request, application_id):
     application = get_object_or_404(Application, id=application_id)

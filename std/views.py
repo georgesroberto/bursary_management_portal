@@ -8,7 +8,8 @@ from bus.forms import ApplicationForm
 
 def student_index(request):
     students = Student.objects.all()
-    context={'students':students}
+    applications = Application.objects.all()
+    context={'students':students,'applications':applications}
     return render(request, 'student/index.html', context)
 
 
@@ -38,17 +39,15 @@ def apply_for_bursary(request, bursary_id, student_id):
             application.bursary = bursary
             application.status = 'Submitted'
             application.save()
-            return redirect('application_status', application_id=application.id)
+            return redirect('application_list', application_id=application.id)
     else:
         form = ApplicationForm()
 
     return render(request, 'student/apply_for_bursary.html', {'form': form, 'bursary': bursary})
 
-
-
-def application_index(request):
-    bursaries = Bursary.objects.all()
-    return render(request, 'student/application_list.html', {'bursaries':bursaries})
+def application_list(request):
+    applications = Application.objects.all()
+    return render(request, 'student/application_list.html', {'applications':applications})
 
 @login_required
 def view_application_status(request):

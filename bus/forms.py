@@ -15,3 +15,4 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = '__all__'
+        exclude = 'status',

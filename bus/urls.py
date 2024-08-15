@@ -14,7 +14,6 @@ urlpatterns = [
     path('<int:bursary_id>/delete/', views.delete_bursary, name='delete_bursary'),
 
     # Questionnaire and Applications
-    path('<int:bursary_id>/apply/', views.submit_application, name='submit_application'),
     path('application/<int:application_id>/issue/', views.issue_bursary, name='issue_bursary'),
 ]
 

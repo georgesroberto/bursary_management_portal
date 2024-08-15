@@ -13,7 +13,9 @@
 
               <div class="d-flex align-items-center">
                 <div class="ps-3">
-                  <h6>Bursaries</h6>
+                  <h6>
+                    <a href="{% url 'bus:list_bursaries' %}"> Bursaries </a>
+                  </h6>
                   <span class="text-success small pt-1 fw-bold"
                     >{{ bursaries.count|default:"0" }}</span
                   >
@@ -33,9 +35,17 @@
 
               <div class="d-flex align-items-center">
                 <div class="ps-3">
-                  <h6>Applications</h6>
-                  <span class="text-success small pt-1 fw-bold">12</span>
-                  <span class="text-muted small pt-2 ps-1">applicants</span>
+                  <h6>
+                    <a href="{% url 'bus:application_pending' %}">
+                      Applications
+                    </a>
+                  </h6>
+                  <span class="text-success small pt-1 fw-bold"
+                    >{{ applications.count }}</span
+                  >
+                  <span class="text-muted small pt-2 ps-1"
+                    >applican{{ applications.count|pluralize:"t,ts" }}</span
+                  >
                 </div>
               </div>
             </div>

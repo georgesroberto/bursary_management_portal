@@ -18,7 +18,7 @@ class Application(models.Model):
     status = models.CharField(max_length=20, choices=[('Submitted', 'Submitted'), ('Approved', 'Approved'), ('Rejected', 'Rejected')])
 
     def __str__(self):
-        return f"{self.status}"
+        return f"{self.student.student_id}"
 
 class Document(models.Model):
     application = models.OneToOneField(Application, on_delete=models.CASCADE)

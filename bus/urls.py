@@ -13,7 +13,10 @@ urlpatterns = [
     path('<int:bursary_id>/update/', views.update_bursary, name='update_bursary'),
     path('<int:bursary_id>/delete/', views.delete_bursary, name='delete_bursary'),
 
-    # Questionnaire and Applications
+    # Applications
+    path('applications/completed/', views.application_list, name='application_list'),
+    path('applications/pending/', views.application_pending, name='application_pending'),
     path('application/<int:application_id>/issue/', views.issue_bursary, name='issue_bursary'),
+    path('application/<int:application_id>/reject/', views.reject_bursary, name='reject_bursary'),
 ]
 

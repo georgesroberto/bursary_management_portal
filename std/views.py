@@ -39,7 +39,7 @@ def apply_for_bursary(request, bursary_id, student_id):
             application.bursary = bursary
             application.status = 'Submitted'
             application.save()
-            return redirect('application_list', application_id=application.id)
+            return redirect('std:application_list')
     else:
         form = ApplicationForm()
 

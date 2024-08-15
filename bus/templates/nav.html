@@ -43,7 +43,7 @@
         class="nav-link collapsed"
         data-bs-target="#applications-nav"
         data-bs-toggle="collapse"
-        href="{% url 'bus:index' %}"
+        href="{% url 'bus:application_list' %}"
       >
         <i class="bi bi-clipboard2-data"></i><span>Applications</span
         ><i class="bi bi-chevron-down ms-auto"></i>
@@ -54,15 +54,15 @@
         data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="{% url 'bus:list_bursaries' %}">
+          <a href="{% url 'bus:application_list' %}">
             <i class="bi bi-pencil text-primary bi-2xlg"></i>
             <span>All Applications</span>
           </a>
         </li>
         <li>
-          <a href="{% url 'bus:create_bursary' %}">
-            <i class="bi bi-plus text-primary bi-2xlg"></i>
-            <span>New Bursary</span>
+          <a href="{% url 'bus:application_pending' %}">
+            <i class="bi bi-pencil text-primary bi-2xlg"></i>
+            <span>Pending Applications</span>
           </a>
         </li>
       </ul>

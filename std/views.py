@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from bus.models import Bursary, Application
-from bus.forms import QuestionnaireForm
 from std.models import Student
-
+from bus.forms import ApplicationForm
 
 # Create your views here.
+
+def student_index(request):
+    students = Student.objects.all()
+    context={'students':students}
+    return render(request, 'student/index.html', context)
+
 
 # Student Views
 def student_list(request):
@@ -17,28 +22,33 @@ def student_list(request):
 @login_required
 def view_bursaries(request):
     bursaries = Bursary.objects.all().order_by('-created_at')
-    return render(request, 'student/view_bursaries.html', {'bursaries': bursaries})
+    students = Student.objects.all()
+    return render(request, 'student/view_bursaries.html', {'bursaries': bursaries, 'students': students})
 
 @login_required
-def apply_for_bursary(request, bursary_id):
+def apply_for_bursary(request, bursary_id, student_id):
     bursary = get_object_or_404(Bursary, id=bursary_id)
+    student = get_object_or_404(Student, id=student_id)
+
     if request.method == 'POST':
-        form = QuestionnaireForm(request.POST)
+        form = ApplicationForm(request.POST)
         if form.is_valid():
             application = form.save(commit=False)
-            application.student = request.user.student
+            application.student = student
             application.bursary = bursary
+            application.status = 'Submitted'
             application.save()
             return redirect('application_status', application_id=application.id)
     else:
-        form = QuestionnaireForm()
+        form = ApplicationForm()
+
     return render(request, 'student/apply_for_bursary.html', {'form': form, 'bursary': bursary})
 
 
 
 def application_index(request):
     bursaries = Bursary.objects.all()
-    return render(request, 'student/index.html', {'bursaries':bursaries})
+    return render(request, 'student/application_list.html', {'bursaries':bursaries})
 
 @login_required
 def view_application_status(request):

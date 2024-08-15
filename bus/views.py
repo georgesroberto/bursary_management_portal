@@ -4,10 +4,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from core.decorators import check_group_permission
 from django.contrib import messages
-from django.http import HttpResponse
 from django.db.models import Q
-from .models import Bursary, Questionnaire, Application, Document
-from .forms import BursaryForm, QuestionnaireForm, ApplicationForm
+from .models import Bursary, Application, Document
+from .forms import BursaryForm, ApplicationForm
 
 
 # Create your views here.
@@ -79,24 +78,6 @@ def issue_bursary(request, application_id):
         messages.success(request, 'Bursary issued and document generated.')
         return redirect('bus:application_status', application_id=application.id)
     return redirect('bus:list_bursaries')
-
-
-# Questionnaire Views
-
-@login_required
-def create_questionnaire(request, bursary_id):
-    bursary = get_object_or_404(Bursary, id=bursary_id)
-    if request.method == 'POST':
-        form = QuestionnaireForm(request.POST)
-        if form.is_valid():
-            questionnaire = form.save(commit=False)
-            questionnaire.bursary = bursary
-            questionnaire.save()
-            messages.success(request, 'Questionnaire created successfully.')
-            return redirect('bursary_detail', bursary_id=bursary.id)
-    else:
-        form = QuestionnaireForm()
-    return render(request, 'bursary/create_questionnaire.html', {'form': form, 'bursary': bursary})
 
 
 #  Application view

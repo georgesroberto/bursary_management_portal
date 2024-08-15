@@ -1,5 +1,5 @@
 from django import forms
-from .models import Bursary, Questionnaire, Application
+from .models import Bursary, Application
 
 class BursaryForm(forms.ModelForm):
     class Meta:
@@ -11,12 +11,7 @@ class BursaryForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
 
-class QuestionnaireForm(forms.ModelForm):
-    class Meta:
-        model = Questionnaire
-        fields = ['question_text']
-
 class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
-        fields = ['answers']
+        fields = '__all__'

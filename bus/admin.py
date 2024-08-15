@@ -1,15 +1,10 @@
 from django.contrib import admin
-from .models import Bursary, Questionnaire, Application, Document
+from .models import Bursary,Application, Document
 
 @admin.register(Bursary)
 class BursaryAdmin(admin.ModelAdmin):
     list_display = ('title', 'amount', 'posted_by')
     search_fields = ('title', 'description')
-
-@admin.register(Questionnaire)
-class QuestionnaireAdmin(admin.ModelAdmin):
-    list_display = ('bursary', 'question_text')
-    search_fields = ('question_text',)
 
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):

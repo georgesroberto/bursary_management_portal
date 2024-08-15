@@ -1,4 +1,4 @@
-{% extends 'admin_generic.html' %} {% block content %} {% include 'std_nav.html'%}
+{% extends 'admin_generic.html' %} {% block content %}{%include 'std_nav.html'%}
 
 <section class="section dashboard">
   <div class="row">
@@ -13,9 +13,9 @@
 
               <div class="d-flex align-items-center">
                 <div class="ps-3">
-                  <h6>Students</h6>
+                  <h6><a href="{% url 'std:student_list' %}">Students</a></h6>
                   <span class="text-success small pt-1 fw-bold"
-                    >{{ students.count|default:"0" }}</span
+                    >{{ students.count|default:"No data" }}</span
                   >
                   <span class="text-muted small pt-2 ps-1">posted</span>
                 </div>

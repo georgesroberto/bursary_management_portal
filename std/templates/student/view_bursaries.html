@@ -15,26 +15,41 @@
                 <table class="table table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="#">#</th>
-                      <th class="col-2">Title</th>
-                      <th class="col-6">Description</th>
+                      <th class="col-1">#</th>
+                      <th class="col-3">Title</th>
                       <th class="col-2">Amount</th>
+                      <th class="col-4">Student</th>
                       <th class="col-2">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% if bursaries %} {% for busary in bursaries %}
+                    {% if bursaries %} {% for bursary in bursaries %}
                     <tr>
                       <td>{{ forloop.counter }}</td>
-                      <td>{{ busary.title }}</td>
-                      <td>{{ busary.description }}</td>
-                      <td>{{ busary.amount }}</td>
+                      <td>{{ bursary.title }}</td>
+                      <td>{{ bursary.amount }}</td>
                       <td>
+                        <select name="student_id" class="form-select">
+                          <option value="" selected disabled>
+                            Select student
+                          </option>
+                          {% if students %} {% for student in students %}
+                          <option value="{{ student.student_id }}">
+                            {{ student.student_id }}
+                          </option>
+                          {% endfor %} {% else %}
+                          <option value="" disabled>
+                            No students available
+                          </option>
+                          {% endif %}
+                        </select>
+                      </td>
+                      <td>
+                        {% for student in students %}
                         <a
-                          href="{% url 'std:apply_for_bursary' busary.pk %}"
-                          class="btn btn-sm btn-primary"
+                          href="{% url 'std:apply_for_bursary' bursary.pk student.id %}"
                         >
-                          <i class="bi bi-box-arrow-down"></i> Apply
+                          {% endfor %} Apply
                         </a>
                       </td>
                     </tr>
